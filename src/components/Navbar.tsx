@@ -60,8 +60,8 @@ const Navbar = () => {
             href="/"
             className="group relative"
           >
-            <div className="text-2xl md:text-4xl font-bold font-display">
-              <span className="text-luxury-platinum text-lg font-serif">CodeRheem</span>
+            <div className="text-2xl md:text-4xl font-bold font-display -ml-6">
+              <span className="text-luxury-platinum text-2xl fira-sans-semibold">CODERHEEM</span>
               <span className="text-luxury-gold text-sm">.dev</span>
             </div>
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-luxury-gradient group-hover:w-full transition-all duration-300"></div>
@@ -92,7 +92,7 @@ const Navbar = () => {
                   {link.title === "Contact Me" ? (
                     <a
                       href={link.path}
-                      className="px-6 py-2 border border-luxury-gold bg-luxury-gold rounded-full font-semibold transition-all duration-300  hover:scale-105 hover:shadow-lg hover:shadow-luxury-gold/30 block"
+                      className="px-4 py-1 border -mr-6 border-luxury-gold bg-luxury-gold rounded-full font-semibold transition-all duration-300  hover:scale-105 hover:shadow-lg hover:shadow-luxury-gold/30 block"
                     >
                       {link.title}
                     </a>
