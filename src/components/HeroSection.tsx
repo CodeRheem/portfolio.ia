@@ -2,18 +2,17 @@ export default function HeroSection() {
   return (
     <section className="min-h-[60vh] flex flex-col justify-center items-center text-center py-20 md:py-32 mt-26">
       <h1
-        className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white"
-        style={{ fontFamily: "'Playfair Display', serif" }}
+        className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white courier-prime-bold"
       >
         BUILD WITH{" "}<br />
         <span className="text-luxury-gold font-semibold text-6xl">PRECISION,</span>{" "}<br />
-        INNOVATE WITH PURPOSE
+        INNOVATE WITH PURPOSE.
       </h1>
       <p
         className="text-lg md:text-xl text-text-secondary-light dark:text-text-secondary-dark mb-8 max-w-3xl text-white"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
-        I'm Abdul Rahman, a dedicated Front-End Developer specializing in
+        I'm Ibraheem Abdul-Rahman, a dedicated Front-End Developer specializing in
         building responsive and user-centric web applications. With a keen eye
         for detail and a passion for coding, I transform ideas into seamless
         digital experiences.
