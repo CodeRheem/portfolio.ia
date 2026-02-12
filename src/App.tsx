@@ -3,6 +3,7 @@ import BackgroundImage from "./components/BackgroundImage";
 import ContentWrapper from "./components/ContentWrapper";
 import { motion } from "framer-motion";
 import HeroSection from "./components/HeroSection";
+import DotBackground from "./components/DotBackground";
 
 function App() {
   return (
@@ -43,9 +44,9 @@ function App() {
             className="absolute bottom-[20%] right-[-5%] w-[30rem] h-[30rem] bg-blue-500/5 rounded-full blur-[100px] dark:bg-blue-500/10"
           />
         </div>
+        <DotBackground />
         <ContentWrapper>
           <Navbar />
-          <HeroSection />
         </ContentWrapper>
       </div>
     </>

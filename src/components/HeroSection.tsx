@@ -15,10 +15,7 @@ export default function HeroSection() {
       </h1>
       
       <p className="text-base sm:text-lg md:text-xl text-text-secondary-light dark:text-text-secondary-dark mb-6 sm:mb-8 max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl text-white courier-prime-regular px-4">
-        Hi, I'm Ibraheem Abdul-Rahman — A passionate Front-End Developer who
-        crafts responsive, user-focused web applications with precision and
-        creativity. I bring ideas to life through clean code and intuitive
-        digital experiences.
+        Hi, I'm <span className="text-white font-semibold">Ibraheem Abdulrahman</span>. A Software Engineer crafting innovative and intelligent systems.
       </p>
       
       <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center w-full max-w-md sm:max-w-none px-4">
