@@ -2,6 +2,8 @@
 
 @import "tw-animate-css";
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -140,6 +142,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Space Grotesk", sans-serif;
   }
 }
 
@@ -217,6 +220,14 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 700;
   font-style: normal;
+}
+
+.font-body-space {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.font-display-playfair {
+  font-family: "Playfair Display", serif;
 }
 
 .fira-sans-extrabold {

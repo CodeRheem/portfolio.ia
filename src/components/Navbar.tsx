@@ -56,7 +56,7 @@ const Navbar = () => {
             href="/"
             className="group relative"
           >
-            <div className="text-xl sm:text-2xl md:text-4xl font-bold font-display -ml-2 sm:-ml-6">
+            <div className="text-xl sm:text-2xl md:text-4xl font-bold font-display-playfair -ml-2 sm:-ml-6">
               <span className="text-luxury-platinum text-xl sm:text-2xl fira-sans-semibold">CODERHEEM</span>
               <span className="text-luxury-gold text-xs sm:text-sm">.dev</span>
             </div>
