@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import NavLink from "./NavLinks";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from "./MenuOverlay";
@@ -46,7 +46,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed mx-auto top-0 left-0 right-0 z-50 transition-all duration-300`}>
+    <nav className={`fixed mx-auto top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md' : ''}`}>
       {/* Content centered within the vertical grid lines (8.33% from each side) */}
       <div className="max-w-[83.34%] mx-auto px-2 sm:px-6">
         <div className="flex lg:py-6 flex-wrap items-center justify-between py-3 sm:py-4">
@@ -56,8 +56,8 @@ const Navbar = () => {
             href="/"
             className="group relative"
           >
-            <div className="text-xl sm:text-2xl md:text-4xl font-bold font-display-playfair -ml-2 sm:-ml-6">
-              <span className="text-luxury-platinum text-xl sm:text-2xl fira-sans-semibold">CODERHEEM</span>
+            <div className="text-xl sm:text-2xl md:text-4xl font-bold courier-prime-bold -ml-2 sm:-ml-6">
+              <span className="text-luxury-platinum text-xl sm:text-2xl courier-prime-bold">CODERHEEM</span>
               <span className="text-luxury-gold text-xs sm:text-sm">.dev</span>
             </div>
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-luxury-gradient group-hover:w-full transition-all duration-300"></div>

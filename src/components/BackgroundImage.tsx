@@ -1,6 +1,6 @@
 export default function BackgroundImage() {
   return (
-    <div className="fixed inset-0 pointer-events-none bg-black z-[1]">
+    <div className="fixed inset-0 pointer-events-none bg-black z-1">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 900"
@@ -15,13 +15,13 @@ export default function BackgroundImage() {
               .line {
                 stroke: var(--line-colour, #ffffff);
                 stroke-width: 1;
-                stroke-opacity: 0.75;
+                stroke-opacity: 0.3;
                 vector-effect: non-scaling-stroke;
                 stroke-linecap: round;
                 fill: none;
               }
               .line-strong {
-                stroke-opacity: 0.9;
+                stroke-opacity: 0.5;
               }
             `}
           </style>

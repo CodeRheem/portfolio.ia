@@ -2,7 +2,7 @@
 
 @import "tw-animate-css";
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -52,6 +52,18 @@
   --color-luxury-platinum: #E5E4E2;
   --color-luxury-dark: #0A0A0A;
   --color-luxury-darkGray: #1A1A1A;
+
+  /* Custom text & surface colors */
+  --color-text-main-light: #E5E4E2;
+  --color-text-main-dark: #F5F5F4;
+  --color-text-muted-light: #9CA3AF;
+  --color-text-muted-dark: #D1D5DB;
+  --color-surface-light: #FFFFFF;
+  --color-surface-dark: #1A1A1A;
+  --color-border-light: rgba(255, 255, 255, 0.12);
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+
+  --shadow-soft: 0 2px 15px rgba(0, 0, 0, 0.3);
 }
 
 :root {
@@ -142,11 +154,24 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Courier Prime", monospace;
   }
 }
 
 @layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+  }
+
+  .container-pattern-aligned {
+    max-width: 83.34%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
   /* Luxury text gradient */
   .luxury-text {
     background: linear-gradient(135deg, #D4AF37 0%, #CD7F32 100%);
@@ -180,141 +205,26 @@
   }
 }
 
-.fira-sans-thin {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-}
-
-.fira-sans-extralight {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 200;
-  font-style: normal;
-}
-
-.fira-sans-light {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.fira-sans-regular {
-  font-family: "Fira Sans", sans-serif;
+.space-mono-regular {
+  font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;
 }
 
-.fira-sans-medium {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.fira-sans-semibold {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.fira-sans-bold {
-  font-family: "Fira Sans", sans-serif;
+.space-mono-bold {
+  font-family: "Space Mono", monospace;
   font-weight: 700;
   font-style: normal;
 }
 
-.font-body-space {
-  font-family: "Space Grotesk", sans-serif;
-}
-
-.font-display-playfair {
-  font-family: "Playfair Display", serif;
-}
-
-.fira-sans-extrabold {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 800;
-  font-style: normal;
-}
-
-.fira-sans-black {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-}
-
-.fira-sans-thin-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 100;
-  font-style: italic;
-}
-
-.fira-sans-extralight-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 200;
-  font-style: italic;
-}
-
-.fira-sans-light-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.fira-sans-regular-italic {
-  font-family: "Fira Sans", sans-serif;
+.space-mono-regular-italic {
+  font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: italic;
 }
 
-.fira-sans-medium-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.fira-sans-semibold-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 600;
-  font-style: italic;
-}
-
-.fira-sans-bold-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.fira-sans-extrabold-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 800;
-  font-style: italic;
-}
-
-.fira-sans-black-italic {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 900;
-  font-style: italic;
-}
-.courier-prime-regular {
-  font-family: "Courier Prime", monospace;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.courier-prime-bold {
-  font-family: "Courier Prime", monospace;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.courier-prime-regular-italic {
-  font-family: "Courier Prime", monospace;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.courier-prime-bold-italic {
-  font-family: "Courier Prime", monospace;
+.space-mono-bold-italic {
+  font-family: "Space Mono", monospace;
   font-weight: 700;
   font-style: italic;
 }

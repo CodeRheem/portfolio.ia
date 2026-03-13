@@ -2,8 +2,9 @@ import Navbar from "./components/Navbar";
 import BackgroundImage from "./components/BackgroundImage";
 import ContentWrapper from "./components/ContentWrapper";
 import { motion } from "framer-motion";
-import HeroSection from "./components/HeroSection";
+import MyPhilosophy from "./components/MyPhilosophy";
 import DotBackground from "./components/DotBackground";
+import Portfolio from "./components/Portfolio";
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
         <DotBackground />
         <ContentWrapper>
           <Navbar />
+          <MyPhilosophy />
+          <Portfolio/>
         </ContentWrapper>
       </div>
     </>
