@@ -91,15 +91,15 @@ export default function Metrics() {
                   stiffness: 200,
                   damping: 15,
                 }}
-                className="text-5xl md:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-luxury-gold to-luxury-bronze mb-2"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-luxury-gold to-luxury-bronze mb-2"
               >
                 <AnimatedNumber value={metric.target} suffix={metric.suffix} />
               </motion.h3>
 
-              <p className="text-lg font-semibold text-white mt-2">
+              <p className="text-base sm:text-lg font-semibold text-white mt-2">
                 {metric.title}
               </p>
-              <p className="text-sm text-luxury-platinum/60 mt-1">
+              <p className="text-xs sm:text-sm text-luxury-platinum/60 mt-1">
                 {metric.description}
               </p>
             </motion.div>

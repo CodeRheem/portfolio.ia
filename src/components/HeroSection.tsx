@@ -7,16 +7,16 @@ export default function HeroSection() {
       <div className="relative z-10 flex flex-col items-center">
         <GlowingButton />
 
-        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight text-white space-mono-regular">
+        <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-white space-mono-regular">
           BUILD WITH <br />
-          <span className="text-luxury-gold font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+          <span className="text-luxury-gold font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
             PRECISION,
           </span>{" "}
           <br />
           INNOVATE WITH PURPOSE.
         </h1>
 
-        <p className="text-base sm:text-lg md:text-xl text-text-secondary-light dark:text-text-secondary-dark mb-6 sm:mb-8 max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl text-white space-mono-regular px-4">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-text-secondary-light dark:text-text-secondary-dark mb-6 sm:mb-8 max-w-xs sm:max-w-sm md:max-w-xl lg:max-w-2xl text-white space-mono-regular px-4">
           Hi, I'm{" "}
           <span className="text-white font-semibold">Ibraheem Abdulrahman</span>
           . A Software Engineer crafting innovative and intelligent systems.

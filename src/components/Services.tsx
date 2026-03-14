@@ -82,7 +82,7 @@ export default function Services() {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={containerVariants}
-            className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8"
           >
             {services.map((service, index) => (
               <motion.div
@@ -92,7 +92,7 @@ export default function Services() {
                   y: -4,
                   borderColor: "rgba(234, 179, 8, 0.5)",
                 }}
-                className="p-8 bg-white/[0.04] rounded-2xl border border-white/10 hover:shadow-lg hover:shadow-luxury-gold/10 transition-all duration-300 group"
+                className="p-5 sm:p-6 md:p-7 lg:p-8 bg-white/[0.04] rounded-2xl border border-white/10 hover:shadow-lg hover:shadow-luxury-gold/10 transition-all duration-300 group"
               >
                 {/* Icon */}
                 <motion.div

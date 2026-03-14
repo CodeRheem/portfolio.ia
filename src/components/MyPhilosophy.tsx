@@ -37,7 +37,7 @@ export default function Intro() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-start"
         >
           <motion.div variants={itemVariants} className="relative">
             <div className="sticky top-32">
@@ -51,7 +51,7 @@ export default function Intro() {
                 <span className="text-sm font-bold tracking-widest uppercase text-luxury-platinum/70">My Philosophy</span>
               </div>
               <h2 className="text-4xl md:text-6xl font-display font-bold leading-tight mb-8 text-white space-mono-regular"></h2>
-              <h2 className="text-4xl md:text-6xl font-display font-bold leading-none mb-8 text-white space-mono-regular">Bridging the Gap Between <span className="text-transparent bg-clip-text bg-linear-to-r from-luxury-gold to-luxury-bronze">Human Idea</span> & Digital Reality.</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display font-bold leading-none mb-8 text-white space-mono-regular">Bridging the Gap Between <span className="text-transparent bg-clip-text bg-linear-to-r from-luxury-gold to-luxury-bronze">Human Idea</span> & Digital Reality.</h2>
               <motion.a
                 href="#experience"
                 initial={{ opacity: 0, y: 10 }}

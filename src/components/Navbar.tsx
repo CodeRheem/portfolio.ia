@@ -88,7 +88,7 @@ const Navbar = () => {
                   {link.title === "Contact Me" ? (
                     <a
                       href={link.path}
-                      className="px-4 py-1 border -mr-6 border-luxury-gold bg-luxury-gold rounded-full font-semibold transition-all duration-300  hover:scale-105 hover:shadow-lg hover:shadow-luxury-gold/30 block"
+                      className="px-4 py-1 border -mr-6 border-luxury-gold bg-luxury-gold rounded-full font-semibold transition-all duration-300  hover:scale-105 hover:shadow-lg hover:shadow-luxury-gold/30 block text-black"
                     >
                       {link.title}
                     </a>

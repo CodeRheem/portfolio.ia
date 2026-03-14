@@ -66,7 +66,7 @@ export default function Footer() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center"
           >
             {/* Left — heading + socials */}
             <motion.div
@@ -75,7 +75,7 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-5xl md:text-7xl font-display font-bold leading-none mb-8 tracking-tight text-white space-mono-regular">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-none mb-8 tracking-tight text-white space-mono-regular">
                 LET&apos;S WORK <br />
                 <span className="text-luxury-gold">TOGETHER.</span>
               </h2>
@@ -116,7 +116,7 @@ export default function Footer() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="bg-luxury-gold-250 p-8 md:p-10 rounded-3xl shadow-2xl relative"
+              className="bg-luxury-gold-250 p-4 sm:p-6 md:p-8 lg:p-10 rounded-3xl shadow-2xl relative"
             >
               {/* Gold glow border */}
               <motion.div

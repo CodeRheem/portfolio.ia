@@ -125,7 +125,7 @@ function ProjectCard({ project }: { project: Project }) {
       />
 
       {/* ── Image area ── */}
-      <div className="relative h-52 overflow-hidden bg-white/5">
+      <div className="relative h-40 sm:h-48 md:h-52 lg:h-56 overflow-hidden bg-white/5">
         {/* Project image */}
         {!imgError && (
           <motion.img
@@ -188,10 +188,10 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {/* ── Card content ── */}
-      <div className="flex flex-col grow p-6 gap-4">
+      <div className="flex flex-col grow p-4 sm:p-5 md:p-6 gap-3 sm:gap-4">
         <div className="flex items-start justify-between gap-3">
           <motion.h3
-            className="text-xl font-bold text-white group-hover:text-[var(--accent)] transition-colors duration-300 leading-snug"
+            className="text-lg sm:text-xl font-bold text-white group-hover:text-[var(--accent)] transition-colors duration-300 leading-snug"
             style={{ "--accent": accent } as React.CSSProperties}
           >
             {project.title}
