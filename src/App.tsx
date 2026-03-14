@@ -7,6 +7,9 @@ import DotBackground from "./components/DotBackground";
 import Portfolio from "./components/Portfolio";
 import Services from "./components/Services";
 import Education from "./components/Education";
+import FAQ from "./components/FAQ";
+import Metrics from "./components/Metrics";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -93,6 +96,9 @@ function App() {
             <Portfolio />
             <Services />
             <Education />
+            <FAQ />
+            <Metrics />
+            <Footer />
           </ContentWrapper>
         </div>
       </div>

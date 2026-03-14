@@ -1,5 +1,3 @@
-"use client";
-
 import { motion, useInView } from "framer-motion";
 import { Globe, Palette, Code, Sparkles } from "lucide-react";
 import { useRef } from "react";
