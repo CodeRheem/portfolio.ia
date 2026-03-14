@@ -6,6 +6,7 @@ import MyPhilosophy from "./components/MyPhilosophy";
 import DotBackground from "./components/DotBackground";
 import Portfolio from "./components/Portfolio";
 import Services from "./components/Services";
+import Education from "./components/Education";
 
 function App() {
   return (
@@ -91,6 +92,7 @@ function App() {
             <MyPhilosophy />
             <Portfolio />
             <Services />
+            <Education />
           </ContentWrapper>
         </div>
       </div>
