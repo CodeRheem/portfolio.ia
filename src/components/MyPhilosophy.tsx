@@ -30,8 +30,8 @@ export default function Intro() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="about" className="py-24 relative">
-      <div className="container-pattern-aligned">
+    <section id="about" className="relative py-24 overflow-hidden">
+      <div className="container-pattern-aligned relative z-10">
         <motion.div
           ref={ref}
           initial="hidden"

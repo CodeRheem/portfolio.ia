@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { Play } from "lucide-react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { ExternalLink, Sparkles } from "lucide-react";
 
 interface Project {
   id: number;
   title: string;
   description: string;
   tags: string[];
-  category: string;
-  image: string;
+  category: "Web App" | "Mobile" | "Entertainment" | "Productivity";
   url: string;
+  image?: string;
   featured?: boolean;
+  accent?: string;
 }
 
 const projects: Project[] = [
@@ -22,169 +22,209 @@ const projects: Project[] = [
       "A modern fitness platform designed to help users improve their health and reach their fitness goals through structured workout programs, strength training, cardio sessions, and expert guidance.",
     tags: ["Fitness", "React", "Tailwind"],
     category: "Web App",
-    image: "/images/projects/break-fitnezz.png",
     url: "https://break-fitnezz.vercel.app",
+    image: "/images/break-fitnezz.png",
+    accent: "#f97316",
   },
   {
     id: 2,
     title: "Movix",
     description:
       "A modern movie discovery web application that allows users to explore trending movies, search for films, and view detailed information such as ratings, trailers, and release dates.",
-    tags: ["Vue", "API", "Tailwind CSS"],
+    tags: ["Vue", "REST API", "Tailwind CSS"],
     category: "Entertainment",
-    image: "/images/projects/movix.png",
     url: "https://movix-two-ruby.vercel.app",
+    image: "/images/movix%20(1).png",
+    accent: "#a855f7",
   },
- {
-  id: 3,
-  title: "Note App",
-  description: "A simple and responsive note-taking web application that allows users to create, edit, and delete notes while keeping ideas and tasks organized.",
-  tags: ["NextJs", "JavaScript", "Tailwind CSS"],
-  category: "Productivity",
-  image: "/images/projects/note-app.png",
-  url: ""
-}
+  {
+    id: 3,
+    title: "SprintFixer",
+    description:
+      "A modern productivity web application designed to help users organize tasks, manage workflows, and stay focused by breaking work into manageable sprints.",
+    tags: ["Next.js", "TypeScript", "Productivity"],
+    category: "Productivity",
+    url: "https://sprintfixer-frontend.vercel.app",
+    accent: "#22d3ee",
+  },
 ];
 
-const categories = ["All Projects", "Web App", "Mobile"];
+const CATEGORIES = [
+  "All Projects",
+  "Web App",
+  "Entertainment",
+  "Productivity",
+  "Mobile",
+] as const;
+type Category = (typeof CATEGORIES)[number];
+
+function getLiveScreenshot(url: string): string {
+  const normalizedUrl = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+  return `https://image.thum.io/get/width/1280/crop/720/${normalizedUrl}`;
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  hidden: { opacity: 0, y: 48, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
   },
+  exit: { opacity: 0, y: -24, scale: 0.95, transition: { duration: 0.3 } },
 };
 
 function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  const accent = project.accent ?? "#eab308";
+  const screenshotSrc = project.image ?? getLiveScreenshot(project.url);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
   return (
     <motion.div
       ref={cardRef}
       variants={cardVariants}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      layout
+      whileHover={{ y: -10, transition: { duration: 0.3, ease: "easeOut" } }}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`group glass-card border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 flex flex-col h-full ${
-        project.featured
-          ? "border-2 border-luxury-gold/70 shadow-lg shadow-luxury-gold/20 transform md:-translate-y-6 z-10"
-          : "border-white/10 hover:border-luxury-gold/40"
-      }`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-white/[0.04] backdrop-blur-sm hover:border-white/25 transition-colors duration-500"
+      style={{
+        boxShadow: hovered
+          ? `0 0 40px 0 ${accent}22, 0 20px 60px -10px rgba(0,0,0,0.6)`
+          : "0 4px 30px rgba(0,0,0,0.4)",
+      }}
     >
-      <div className="h-56 overflow-hidden relative">
-        <motion.div
-          className={`absolute inset-0 z-10 transition-opacity duration-300 ${
-            project.featured ? "bg-black/35" : "bg-luxury-gold/20"
-          }`}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-        />
-        <motion.div
-          animate={{
-            scale: isHovered ? 1.1 : 1,
-            x: isHovered ? (mousePosition.x - 128) * 0.05 : 0,
-            y: isHovered ? (mousePosition.y - 112) * 0.05 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="w-full h-full"
-        >
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
+      {/* Spotlight glow that follows the cursor */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: hovered
+            ? `radial-gradient(300px circle at ${mouse.x}px ${mouse.y}px, ${accent}18, transparent 70%)`
+            : "none",
+        }}
+      />
+
+      {/* ── Image area ── */}
+      <div className="relative h-52 overflow-hidden bg-white/5">
+        {/* Project image */}
+        {!imgError && (
+          <motion.img
+            src={screenshotSrc}
+            alt={`${project.title} live preview`}
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgError(true)}
+            animate={{
+              scale: hovered ? 1.06 : 1,
+              x: hovered ? (mouse.x - 160) * 0.04 : 0,
+              y: hovered ? (mouse.y - 104) * 0.04 : 0,
+            }}
+            transition={{ duration: 0.4 }}
+            className={`w-full h-full object-cover object-top transition-opacity duration-700 ${
+              imgLoaded ? "opacity-100" : "opacity-0"
+            }`}
           />
-        </motion.div>
+        )}
+
+        {/* Dark overlay + View Live button on hover */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-          transition={{ duration: 0.3 }}
           className="absolute inset-0 z-20 flex items-center justify-center"
+          style={{
+            background: hovered
+              ? "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 100%)"
+              : "linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%)",
+            transition: "background 0.4s ease",
+          }}
         >
-          {project.featured ? (
-            <motion.a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg"
-            >
-              <Play className="w-8 h-8 text-black" />
-            </motion.a>
-          ) : (
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              className="bg-white text-black px-6 py-2 rounded-full font-bold text-sm shadow-lg"
-            >
-              View Details
-            </motion.span>
-          )}
+          <motion.a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.94 }}
+            transition={{ duration: 0.25 }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-black shadow-xl"
+            style={{ background: accent }}
+          >
+            <ExternalLink className="w-4 h-4" />
+            View Live
+          </motion.a>
         </motion.div>
+
+        {/* Category badge */}
+        <span
+          className="absolute top-3 left-3 z-30 text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
+          style={{
+            background: `${accent}22`,
+            color: accent,
+            border: `1px solid ${accent}44`,
+          }}
+        >
+          {project.category}
+        </span>
+
+
       </div>
-      <div
-        className={`p-8 flex flex-col grow ${project.featured ? "bg-linear-to-b from-luxury-gold/10 to-transparent" : ""}`}
-      >
-        <div className="flex justify-between items-start mb-2">
+
+      {/* ── Card content ── */}
+      <div className="flex flex-col grow p-6 gap-4">
+        <div className="flex items-start justify-between gap-3">
           <motion.h3
-            whileHover={{ x: 5 }}
-            className="text-2xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors"
+            className="text-xl font-bold text-white group-hover:text-[var(--accent)] transition-colors duration-300 leading-snug"
+            style={{ "--accent": accent } as React.CSSProperties}
           >
             {project.title}
           </motion.h3>
+
           {project.featured && (
             <motion.span
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="bg-luxury-gold text-black text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider"
+              animate={{ scale: [1, 1.08, 1] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
+              className="shrink-0 flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-widest text-black"
+              style={{ background: accent }}
             >
+              <Sparkles className="w-2.5 h-2.5" />
               Featured
             </motion.span>
           )}
         </div>
-        <p className="text-sm text-luxury-platinum/60 mb-6 leading-relaxed line-clamp-3">
+
+        <p className="text-sm text-white/50 leading-relaxed line-clamp-3 flex-grow">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 pt-1">
           {project.tags.map((tag, i) => (
             <motion.span
               key={tag}
-              initial={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0, scale: 0.7 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "rgba(234, 179, 8, 0.1)",
-              }}
-              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-luxury-platinum/80 font-medium cursor-default"
+              transition={{ delay: i * 0.08 }}
+              whileHover={{ scale: 1.1 }}
+              className="px-3 py-1 rounded-full text-[11px] font-medium text-white/60 border border-white/10 bg-white/5 cursor-default"
             >
               {tag}
             </motion.span>
@@ -195,76 +235,106 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState("All Projects");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+// ─── Portfolio section ─────────────────────────────────────────────────────────
 
-  const filteredProjects = projects.filter((p) => {
-    if (selectedCategory === "All Projects") return true;
-    return p.category === selectedCategory.split(" / ")[0];
-  });
+export default function Portfolio() {
+  const [selected, setSelected] = useState<Category>("All Projects");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  const filtered = projects.filter((p) =>
+    selected === "All Projects" ? true : p.category === selected
+  );
 
   return (
-    <section id="portfolio" className="py-24 relative">
-      <div className="container-pattern-aligned">
+    <section id="portfolio" className="py-28 relative overflow-hidden space-mono-regular">
+      {/* Ambient background blob */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-20 blur-[120px]"
+        style={{
+          background:
+            "radial-gradient(ellipse, #eab30855, transparent 70%)",
+        }}
+      />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+
+        {/* ── Heading ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-14"
         >
-          <p className="text-sm font-bold tracking-widest uppercase text-luxury-platinum/70 mb-4">
-            Portfolio
-          </p>
-          <h2 className="text-4xl md:text-6xl font-display font-bold mb-6 text-white space-mono-regular">
+        
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-5 leading-tight">
             Featured{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-luxury-gold to-luxury-bronze">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
               Masterpieces
             </span>
           </h2>
-          <p className="text-luxury-platinum/60 text-lg">
-            A selection of projects where AI meets intuitive design to solve
-            real-world problems.
+          <p className="text-white/50 text-base">
+            A curated selection of projects where thoughtful engineering meets
+            intuitive design to solve real-world problems.
           </p>
         </motion.div>
 
+        {/* ── Filter tabs ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="flex flex-wrap justify-center gap-3 mb-14"
         >
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                selectedCategory === category
-                  ? "bg-luxury-gold text-black shadow-md shadow-luxury-gold/30"
-                  : "border border-white/15 text-luxury-platinum/70 hover:border-luxury-gold hover:text-luxury-gold"
-              }`}
-            >
-              {category}
-            </motion.button>
-          ))}
+          {CATEGORIES.map((cat) => {
+            const active = selected === cat;
+            return (
+              <motion.button
+                key={cat}
+                onClick={() => setSelected(cat)}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  active
+                    ? "text-black shadow-lg shadow-yellow-500/30"
+                    : "border border-white/15 text-white/50 hover:border-white/30 hover:text-white"
+                }`}
+                style={active ? { background: "#eab308" } : {}}
+              >
+                {cat}
+              </motion.button>
+            );
+          })}
         </motion.div>
 
+        {/* ── Project grid ── */}
         <motion.div
           ref={ref}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </AnimatePresence>
         </motion.div>
+
+        {/* Empty state */}
+        {filtered.length === 0 && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center text-white/30 mt-16 text-sm"
+          >
+            No projects in this category yet.
+          </motion.p>
+        )}
       </div>
     </section>
   );
