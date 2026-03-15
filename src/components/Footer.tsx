@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { Twitter, Instagram, Linkedin, Github, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
-import { useRef, useState, type FormEvent, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import { useRef, useState, type FormEvent } from "react";
+import { sendContactEmail } from "../lib/emailjs-config";
 
 export default function Footer() {
   const ref = useRef(null);
@@ -12,12 +12,6 @@ export default function Footer() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Initialize EmailJS
-  useEffect(() => {
-    // Replace with your EmailJS public key from https://dashboard.emailjs.com/
-    emailjs.init("HGBjNK631nawDiH19");
-  }, []);
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -25,18 +19,7 @@ export default function Footer() {
     setErrorMessage("");
 
     try {
-      // Replace with your EmailJS credentials
-      await emailjs.send(
-        "service_onz8zu2", // Service ID from EmailJS
-        "template_tp7rvp7", // Template ID from EmailJS
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_email: "ibraheemabdulrahman305@gmail.com", // Your email address
-        }
-      );
-
+      await sendContactEmail(formData.name, formData.email, formData.message);
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setSubmitStatus("idle"), 5000);

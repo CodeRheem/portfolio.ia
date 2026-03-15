@@ -23,7 +23,7 @@ const projects: Project[] = [
     tags: ["Fitness", "React", "Tailwind"],
     category: "Web App",
     url: "https://break-fitnezz.vercel.app",
-    image: "/images/break-fitnezz.png",
+    image: "/images/break-fitnezz.webp",
     accent: "#f97316",
   },
   {
@@ -34,7 +34,7 @@ const projects: Project[] = [
     tags: ["Vue", "REST API", "Tailwind CSS"],
     category: "Entertainment",
     url: "https://movix-two-ruby.vercel.app",
-    image: "/images/movix%20(1).png",
+    image: "/images/movix (1).webp",
     accent: "#a855f7",
   },
   {

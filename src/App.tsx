@@ -4,12 +4,15 @@ import ContentWrapper from "./components/ContentWrapper";
 import { motion } from "framer-motion";
 import MyPhilosophy from "./components/MyPhilosophy";
 import DotBackground from "./components/DotBackground";
-import Portfolio from "./components/Portfolio";
-import Services from "./components/Services";
-import Education from "./components/Education";
-import FAQ from "./components/FAQ";
-import Metrics from "./components/Metrics";
-import Footer from "./components/Footer";
+import { Suspense, lazy } from "react";
+
+// Lazy load below-the-fold components
+const Portfolio = lazy(() => import("./components/Portfolio"));
+const Services = lazy(() => import("./components/Services"));
+const Education = lazy(() => import("./components/Education"));
+const FAQ = lazy(() => import("./components/FAQ"));
+const Metrics = lazy(() => import("./components/Metrics"));
+const Footer = lazy(() => import("./components/Footer"));
 
 function App() {
   return (
@@ -93,12 +96,14 @@ function App() {
           <ContentWrapper>
             <Navbar />
             <MyPhilosophy />
-            <Portfolio />
-            <Services />
-            <Education />
-            <FAQ />
-            <Metrics />
-            <Footer />
+            <Suspense fallback={<div className="min-h-screen" />}>
+              <Portfolio />
+              <Services />
+              <Education />
+              <FAQ />
+              <Metrics />
+              <Footer />
+            </Suspense>
           </ContentWrapper>
         </div>
       </div>
