@@ -311,7 +311,7 @@ export default function Portfolio() {
     <>
       <section
         id="portfolio"
-        className="relative py-28 overflow-hidden"
+        className="relative py-28 overflow-hidden md:bg-transparent"
       >
 
         <div className="container-pattern-aligned relative z-10">
