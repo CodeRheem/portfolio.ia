@@ -17,7 +17,7 @@ const Footer = lazy(() => import("./components/Footer"));
 function App() {
   return (
     <>
-      <div className="min-h-screen bg-[#080808] text-text-main-light dark:text-text-main-dark font-sans transition-colors duration-300 relative selection:bg-primary selection:text-black">
+      <div className="min-h-screen bg-black md:bg-[#080808] text-text-main-light dark:text-text-main-dark font-sans transition-colors duration-300 relative selection:bg-primary selection:text-black">
 
         {/* Background Pattern SVG */}
         <BackgroundImage />
